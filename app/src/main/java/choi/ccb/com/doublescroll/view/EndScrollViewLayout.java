@@ -12,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
- * ChenboCui 上下层两个ScrollView
+ * ChenboCui 上下层双View联合滚动
  */
-public class DoubleScrollViewLayout extends ViewGroup {
+public class EndScrollViewLayout extends ViewGroup {
     public static String TAG = DoubleScrollViewLayout.class.getName();
 
-    TopBottomMonitorScrollView topScrollView, bottomScrollView;
+    private ViewGroup TopViewGroup;
+    TopBottomMonitorScrollView bottomScrollView;
     VelocityTracker velocityTracker = VelocityTracker.obtain();
     Scroller scroller = new Scroller(getContext());
 
@@ -30,19 +31,19 @@ public class DoubleScrollViewLayout extends ViewGroup {
     boolean isIntercept;
 
     public boolean bottomScrollVIewIsInTop = false;
-    public boolean topScrollViewIsBottom = false;
+    public boolean bottomScrollVIewIsInBottom = true;
 
-    public DoubleScrollViewLayout(Context context) {
+    public EndScrollViewLayout(Context context) {
         super(context);
         init();
     }
 
-    public DoubleScrollViewLayout(Context context, AttributeSet attrs) {
+    public EndScrollViewLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public DoubleScrollViewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public EndScrollViewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -52,27 +53,9 @@ public class DoubleScrollViewLayout extends ViewGroup {
         post(new Runnable() {
             @Override
             public void run() {
-                //在第一个scrollview套一个刷新控件,然后在去拿DoubleScrollView；
-                if (getChildAt(0) instanceof TopBottomMonitorScrollView) {
-                    topScrollView = (TopBottomMonitorScrollView) getChildAt(0);
-                }else if (getChildAt(0) instanceof SwipeRefreshLayout){
-                    SwipeRefreshLayout swipeRefreshLayout  = (SwipeRefreshLayout)getChildAt(0);
-                    for (int i = 0; i < swipeRefreshLayout.getChildCount(); i++) {
-                        if (swipeRefreshLayout.getChildAt(i) instanceof TopBottomMonitorScrollView){
-                            topScrollView = (TopBottomMonitorScrollView) swipeRefreshLayout.getChildAt(i);
-                            break;
-                        }
-                    }
-                }else{
-                    ViewGroup vg  = (ViewGroup) getChildAt(0);
-                    for (int i = 0; i < vg.getChildCount(); i++) {
-                        if (vg.getChildAt(i) instanceof TopBottomMonitorScrollView){
-                            topScrollView = (TopBottomMonitorScrollView) vg.getChildAt(i);
-                            break;
-                        }
-                    }
-                }
-                //第二个scrollview也顺便处理一下,然后在去拿DoubleScrollView；
+
+                    TopViewGroup = (ViewGroup) getChildAt(0);
+                //第二层布局必须是TopMonitorScrollView，它可以监听滑动到顶部；
                 if (getChildAt(1) instanceof TopBottomMonitorScrollView) {
                     bottomScrollView = (TopBottomMonitorScrollView) getChildAt(1);
                 }else if (getChildAt(1) instanceof SwipeRefreshLayout){
@@ -84,7 +67,7 @@ public class DoubleScrollViewLayout extends ViewGroup {
                         }
                     }
                 }else{
-                    ViewGroup vg  = (ViewGroup) getChildAt(1);
+                    ViewGroup vg  = (ViewGroup)getChildAt(1);
                     for (int i = 0; i < vg.getChildCount(); i++) {
                         if (vg.getChildAt(i) instanceof TopBottomMonitorScrollView){
                             bottomScrollView = (TopBottomMonitorScrollView) vg.getChildAt(i);
@@ -92,37 +75,19 @@ public class DoubleScrollViewLayout extends ViewGroup {
                         }
                     }
                 }
-                topScrollView.setScrollListener(new TopBottomMonitorScrollView.ScrollListener() {
-                    @Override
-                    public void onScrollToBottom() {
-                        topScrollViewIsBottom = true;
-                    }
-
-                    @Override
-                    public void onScrollToTop() {
-
-                    }
-
-                    @Override
-                    public void onScroll(int scrollY) {
-                        if (scrollY == 0) {
-                            if (scrollTopListener != null) scrollTopListener.isTop(true);
-                        } else {
-                            if (scrollTopListener != null) scrollTopListener.isTop(false);
-                        }
-                    }
-
-                    @Override
-                    public void notBottom() {
-                        topScrollViewIsBottom = false;
-                    }
-
-                });
-
                 bottomScrollView.setScrollListener(new TopBottomMonitorScrollView.ScrollListener() {
                     @Override
-                    public void onScrollToBottom() {
+                    public void onScroll(int scrollY) {
+                        if (scrollY <= 1){
+                            bottomScrollVIewIsInTop = true;
+                        }else {
+                            bottomScrollVIewIsInTop = false;
+                        }
+                    }
 
+                    @Override
+                    public void onScrollToBottom() {
+                        
                     }
 
                     @Override
@@ -131,23 +96,12 @@ public class DoubleScrollViewLayout extends ViewGroup {
                     }
 
                     @Override
-                    public void onScroll(int scrollY) {
-                        if (scrollY == 0) {
-                            bottomScrollVIewIsInTop = true;
-                            if (scrollTopListener != null) scrollTopListener.isTop(true);
-                        } else {
-                            bottomScrollVIewIsInTop = false;
-                            if (scrollTopListener != null) scrollTopListener.isTop(false);
-                        }
-                    }
-
-                    @Override
                     public void notBottom() {
 
                     }
                 });
 
-                position1Y = topScrollView.getBottom();
+                position1Y = TopViewGroup.getBottom();
 
                 scaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 
@@ -158,7 +112,8 @@ public class DoubleScrollViewLayout extends ViewGroup {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         //防止子View禁止父view拦截事件
-        this.requestDisallowInterceptTouchEvent(false);
+        if (currPosition == this.getChildCount()-1){this.requestDisallowInterceptTouchEvent(false);}
+//        this.requestDisallowInterceptTouchEvent(false);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -174,7 +129,7 @@ public class DoubleScrollViewLayout extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
 
-                if (topScrollViewIsBottom) {
+                if (bottomScrollVIewIsInBottom) {
                     //判断是否已经滚动到了底部
                     int dy1 = lastY - y;
                     int dx1 = lastX - x;
@@ -223,20 +178,11 @@ public class DoubleScrollViewLayout extends ViewGroup {
                 if (getScrollY() + dy < 0) {
                     dy = getScrollY() + dy + Math.abs(getScrollY() + dy);
                 }
-                int fatherHeight;
-                   if (bottomScrollView.getChildAt(0).getHeight() == getHeight()){
-                       fatherHeight = (bottomScrollView.getChildAt(0).getHeight())*2;
-                   }else{
-                       fatherHeight = bottomScrollView.getChildAt(0).getHeight();
-                   }
-                if (getScrollY() + dy + getHeight() > fatherHeight) {
-                    dy = dy - (getScrollY() + dy - (fatherHeight - getHeight()));
+
+                if (getScrollY() + dy + getHeight() > bottomScrollView.getBottom()) {
+                    dy = dy - (getScrollY() + dy - (bottomScrollView.getBottom() - getHeight()));
                 }
                 scrollBy(0, dy);
-                Log.i("ccccc", "getChildAt: "+dy+"-------"+bottomScrollView.getChildAt(0).getHeight());
-                Log.i("ccccc", "getBottom: "+dy+"-------"+bottomScrollView.getBottom());
-                Log.i("ccccc", "getScrollY: "+dy+"-------"+getScaleY());
-                Log.i("ccccc", "getHeight: "+dy+"-------"+getHeight());
                 break;
             case MotionEvent.ACTION_UP:
                 isRecordDown = false;
@@ -297,18 +243,12 @@ public class DoubleScrollViewLayout extends ViewGroup {
     }
 
 
-    //滚动到顶部
-    public void scrollToTop(){
-        smoothScroll(0);
-        currPosition=0;
-        topScrollView.smoothScrollTo(0,0);
-    }
-
     //滚动到第二页
     public void scrollTo1Y(){
         smoothScroll(position1Y);
         currPosition = 1;
         bottomScrollView.smoothScrollTo(0,0);
+        if (currPositionChangeListener != null) currPositionChangeListener.currPosition(currPosition);
     }
 
     @Override
@@ -317,10 +257,6 @@ public class DoubleScrollViewLayout extends ViewGroup {
             scrollTo(scroller.getCurrX(), scroller.getCurrY());
             postInvalidate();
         }
-    }
-
-    public int getCurrPosition(){
-        return currPosition;
     }
 
     public interface onCurrPositionChangeListener{
@@ -334,15 +270,6 @@ public class DoubleScrollViewLayout extends ViewGroup {
     private onCurrPositionChangeListener currPositionChangeListener;
     public void setOnCurrPositionChangeListener(onCurrPositionChangeListener currPositionChangeListener){
         this.currPositionChangeListener = currPositionChangeListener;
-    }
-
-
-    public interface onScrollTopListener{
-        void isTop(boolean top);
-    }
-    private onScrollTopListener scrollTopListener;
-    public void setOnScrollTopListener(onScrollTopListener scrollTopListener){
-        this.scrollTopListener = scrollTopListener;
     }
 
 }

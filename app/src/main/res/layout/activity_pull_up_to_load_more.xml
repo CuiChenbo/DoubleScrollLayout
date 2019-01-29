@@ -3,17 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+  <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/sw"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <choi.ccb.com.doublescroll.view.DoubleScrollViewLayout
         android:id="@+id/doubleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <choi.ccb.com.doublescroll.view.DoubleScrollView
+            <choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true">
@@ -24,72 +23,41 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher_round"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp" />
-
-                    <!--<ImageView-->
-                        <!--android:scaleType="fitXY"-->
-                        <!--android:src="@mipmap/ic_launcher_round"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="180dp" />-->
-
-                    <!--<ImageView-->
-                        <!--android:scaleType="fitXY"-->
-                        <!--android:src="@mipmap/ic_launcher_round"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="180dp" />-->
-                    <!--<ImageView-->
-                        <!--android:scaleType="fitXY"-->
-                        <!--android:src="@mipmap/ic_launcher_round"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="180dp" />-->
-
-
+                    android:src="@mipmap/icon_ccb"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
 
                     <TextView
-                        android:text="这里是标题"
-                        android:textSize="18dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="244dp"
+                        android:text="@string/app_name"
+                        android:gravity="center"
+                        android:background="#88ffbb22"
+                        />
+                    <ImageView
+                        android:src="@mipmap/icon_ccb"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
 
                     <TextView
-                        android:layout_marginTop="10dp"
-                        android:text="子标题"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textSize="18dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="244dp"
+                        android:text="@string/app_name"
+                        android:gravity="center"
+                        android:background="#bff865"
+                        />
 
-                    <LinearLayout
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:layout_width="match_parent">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:height="50dp"
-                            android:background="#b11"
-                            android:gravity="center"
-                            android:text="继续拖动查看图文详情"
-                            android:textColor="#000" />
-
-                    </LinearLayout>
                 </LinearLayout>
 
-            </choi.ccb.com.doublescroll.view.DoubleScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+            </choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView>
 
 
 
-        <choi.ccb.com.doublescroll.view.DoubleScrollView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -125,9 +93,10 @@
 
             </LinearLayout>
 
-        </choi.ccb.com.doublescroll.view.DoubleScrollView>
-
+        </choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView>
+        </RelativeLayout>
     </choi.ccb.com.doublescroll.view.DoubleScrollViewLayout>
+  </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_centerInParent="true"
         android:orientation="vertical"
