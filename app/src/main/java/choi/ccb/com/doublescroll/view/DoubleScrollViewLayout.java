@@ -223,12 +223,12 @@ public class DoubleScrollViewLayout extends ViewGroup {
                 if (getScrollY() + dy < 0) {
                     dy = getScrollY() + dy + Math.abs(getScrollY() + dy);
                 }
-                int fatherHeight;
-                   if (bottomScrollView.getChildAt(0).getHeight() == getHeight()){
-                       fatherHeight = (bottomScrollView.getChildAt(0).getHeight())*2;
-                   }else{
-                       fatherHeight = bottomScrollView.getChildAt(0).getHeight();
-                   }
+                int fatherHeight = bottomScrollView.getBottom() == getHeight() ? (bottomScrollView.getBottom()*2) : bottomScrollView.getBottom();
+//                   if (bottomScrollView.getChildAt(0).getHeight() == getHeight()){
+//                       fatherHeight = (bottomScrollView.getChildAt(0).getHeight())*2;
+//                   }else{
+//                       fatherHeight = bottomScrollView.getChildAt(0).getHeight();
+//                   }
                 if (getScrollY() + dy + getHeight() > fatherHeight) {
                     dy = dy - (getScrollY() + dy - (fatherHeight - getHeight()));
                 }

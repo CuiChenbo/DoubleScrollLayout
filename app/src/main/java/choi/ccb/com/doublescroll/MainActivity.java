@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,PullUpToLoadMoreActivity.class));
+                startActivity(new Intent(MainActivity.this,EndScrollActivity.class));
             }
         });
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {

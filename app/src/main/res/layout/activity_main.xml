@@ -10,11 +10,11 @@
         android:id="@+id/b1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="scroll1" />
+        android:text="双scroll1" />
     <Button
         android:id="@+id/b2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="scroll2" />
+        android:text="下面是scroll" />
 
 </LinearLayout>

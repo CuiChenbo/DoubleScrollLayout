@@ -18,12 +18,6 @@ public class PullUpToLoadMoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pull_up_to_load_more);
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.sw);
         doubleLayout = findViewById(R.id.doubleLayout);
-        doubleLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleLayout.scrollTo1Y();
-            }
-        }, 500);
         findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,9 +41,9 @@ public class PullUpToLoadMoreActivity extends AppCompatActivity {
         doubleLayout.setOnScrollTopListener(new DoubleScrollViewLayout.onScrollTopListener() {
             @Override
             public void isTop(boolean top) {
-                if (doubleLayout.getCurrPosition() == 0){
-                swipeRefreshLayout.setEnabled(top);
-                }else{
+                if (doubleLayout.getCurrPosition() == 0) {
+                    swipeRefreshLayout.setEnabled(top);
+                } else {
                     swipeRefreshLayout.setEnabled(false);
                 }
             }
