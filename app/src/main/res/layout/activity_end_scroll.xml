@@ -3,23 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <choi.ccb.com.doublescroll.view.EndScrollViewLayout
         android:id="@+id/doubleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/sw"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#fbc"
-                android:src="@mipmap/icon_ccb" />
-        </FrameLayout>
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fbc"
+                    android:src="@mipmap/icon_ccb" />
+            </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView
             android:layout_width="match_parent"
@@ -63,4 +69,5 @@
 
         </choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView>
     </choi.ccb.com.doublescroll.view.EndScrollViewLayout>
+
 </RelativeLayout>

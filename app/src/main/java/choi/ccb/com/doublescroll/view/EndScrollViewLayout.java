@@ -170,7 +170,7 @@ public class EndScrollViewLayout extends ViewGroup {
                     if (dy < 0 && Math.abs(dy) > Math.abs(dx) && currPosition == 1) {
                         if (Math.abs(dy) >= scaledTouchSlop) {
                             isIntercept = true;
-//                            lastY = y; //拦截事件后，重新给lastY赋值Y的位置
+                            lastY = y; //拦截事件后，重新给lastY赋值Y的位置
                         }
                     }
                 }
