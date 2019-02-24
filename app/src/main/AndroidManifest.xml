@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".PullUpToLoadMoreActivity" />
         <activity android:name=".EndScrollActivity"></activity>
+        <activity android:name=".SlideActivity"></activity>
     </application>
 
 </manifest>

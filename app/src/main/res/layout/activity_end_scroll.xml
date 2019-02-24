@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <choi.ccb.com.doublescroll.view.EndScrollViewLayout
+    <choi.ccb.com.doublescroll.view.double_layout.EndScrollViewLayout
         android:id="@+id/doubleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
             </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView
+        <choi.ccb.com.doublescroll.view.double_layout.TopBottomMonitorScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -67,7 +67,7 @@
 
             </LinearLayout>
 
-        </choi.ccb.com.doublescroll.view.TopBottomMonitorScrollView>
-    </choi.ccb.com.doublescroll.view.EndScrollViewLayout>
+        </choi.ccb.com.doublescroll.view.double_layout.TopBottomMonitorScrollView>
+    </choi.ccb.com.doublescroll.view.double_layout.EndScrollViewLayout>
 
 </RelativeLayout>

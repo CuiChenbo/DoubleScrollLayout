@@ -1,4 +1,4 @@
-package choi.ccb.com.doublescroll.view;
+package choi.ccb.com.doublescroll.view.double_layout;
 
 import android.content.Context;
 import android.util.AttributeSet;

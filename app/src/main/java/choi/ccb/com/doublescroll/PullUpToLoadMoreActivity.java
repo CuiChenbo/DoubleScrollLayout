@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import choi.ccb.com.doublescroll.view.DoubleScrollViewLayout;
-import choi.ccb.com.doublescroll.view.EndScrollViewLayout;
+import choi.ccb.com.doublescroll.view.double_layout.DoubleScrollViewLayout;
 
 public class PullUpToLoadMoreActivity extends AppCompatActivity {
 

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <choi.ccb.com.doublescroll.view.slide_layout.SlideDetailsLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#fbc"
+                    android:gravity="center"
+                    android:text="GoodsInfo"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#fbc"
+                    android:gravity="center"
+                    android:text="GoodsInfo"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#fbc"
+                    android:gravity="center"
+                    android:text="GoodsInfo"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#fbc"
+                    android:gravity="center"
+                    android:text="GoodsInfo"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#fbc"
+                    android:gravity="center"
+                    android:text="GoodsInfo"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#9fb"
+                    android:gravity="center"
+                    android:text="GoodsDetails"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#9fb"
+                    android:gravity="center"
+                    android:text="GoodsDetails"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#9fb"
+                    android:gravity="center"
+                    android:text="GoodsDetails"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#9fb"
+                    android:gravity="center"
+                    android:text="GoodsDetails"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#9fb"
+                    android:gravity="center"
+                    android:text="GoodsDetails"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+            </LinearLayout>
+
+        </ScrollView>
+    </choi.ccb.com.doublescroll.view.slide_layout.SlideDetailsLayout>
+
+</FrameLayout>

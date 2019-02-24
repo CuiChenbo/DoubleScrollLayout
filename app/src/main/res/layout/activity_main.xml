@@ -17,4 +17,10 @@
         android:layout_height="wrap_content"
         android:text="下面是scroll" />
 
+    <Button
+        android:id="@+id/b3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上下层自由的View" />
+
 </LinearLayout>
