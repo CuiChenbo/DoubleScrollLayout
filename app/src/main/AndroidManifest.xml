@@ -17,8 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".PullUpToLoadMoreActivity" />
-        <activity android:name=".EndScrollActivity"></activity>
-        <activity android:name=".SlideActivity"></activity>
+        <activity android:name=".EndScrollActivity" />
+        <activity android:name=".SlideActivity" />
+        <activity android:name=".Slide2Activity" />
+        <activity android:name=".MyScrollActivity"></activity>
     </application>
 
 </manifest>
